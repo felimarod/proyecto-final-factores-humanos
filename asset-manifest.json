@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/proyecto-final-factores-humanos/static/css/main.233b3b67.css",
+    "main.js": "/proyecto-final-factores-humanos/static/js/main.56836eb9.js",
+    "index.html": "/proyecto-final-factores-humanos/index.html",
+    "main.233b3b67.css.map": "/proyecto-final-factores-humanos/static/css/main.233b3b67.css.map",
+    "main.56836eb9.js.map": "/proyecto-final-factores-humanos/static/js/main.56836eb9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.233b3b67.css",
+    "static/js/main.56836eb9.js"
+  ]
+}

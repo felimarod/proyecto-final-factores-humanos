@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://felimarod.github.io/proyecto-final-factores-humanos/sitemap.xml
