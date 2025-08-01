@@ -13,10 +13,13 @@ import Checkout from './pages/Checkout';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
+      main: '#252422',
     },
     secondary: {
-      main: '#dc004e',
+      main: '#CC4122',
+    },
+    background: {
+      default: '#F5F5F5',
     },
   },
   typography: {
