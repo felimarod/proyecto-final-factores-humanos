@@ -1,36 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import { Search as SearchIcon, ShoppingCart, Star } from "@mui/icons-material";
 import {
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Button,
-  Box,
-  TextField,
-  FormControl,
-  Select,
-  MenuItem,
-  Chip,
-  Pagination,
   Alert,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Chip,
+  Container,
+  FormControl,
+  Grid,
+  MenuItem,
+  Pagination,
+  Select,
   Slider,
-} from '@mui/material';
-import { Star, ShoppingCart, Search as SearchIcon } from '@mui/icons-material';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { products, searchProducts, getProductsByCategory } from '../data/products';
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import {
+  getProductsByCategory,
+  products,
+  searchProducts,
+} from "../data/products";
 
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { addToCart } = useCart();
-  
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('name');
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("name");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 500]);
@@ -43,9 +47,9 @@ const Search = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const query = params.get('q') || '';
-    const category = params.get('category') || 'all';
-    
+    const query = params.get("q") || "";
+    const category = params.get("category") || "all";
+
     setSearchTerm(query);
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -53,17 +57,17 @@ const Search = () => {
 
   useEffect(() => {
     let results = [];
-    
+
     if (searchTerm) {
       results = searchProducts(searchTerm);
-    } else if (selectedCategory !== 'all') {
+    } else if (selectedCategory !== "all") {
       results = getProductsByCategory(selectedCategory);
     } else {
       results = [...products];
     }
 
     // Apply price filter (convert COP to USD display range)
-    results = results.filter(product => {
+    results = results.filter((product) => {
       const usdPrice = product.price / 1000;
       return usdPrice >= priceRange[0] && usdPrice <= priceRange[1];
     });
@@ -71,13 +75,13 @@ const Search = () => {
     // Apply sorting
     results.sort((a, b) => {
       switch (sortBy) {
-        case 'price-low':
+        case "price-low":
           return a.price - b.price;
-        case 'price-high':
+        case "price-high":
           return b.price - a.price;
-        case 'rating':
+        case "rating":
           return b.rating - a.rating;
-        case 'name':
+        case "name":
         default:
           return a.name.localeCompare(b.name);
       }
@@ -95,26 +99,26 @@ const Search = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    if (category === 'all') {
-      navigate('/search');
+    if (category === "all") {
+      navigate("/search");
     } else {
       navigate(`/search?category=${category}`);
     }
   };
 
   const handleFilterToggle = (filterType, value) => {
-    setSelectedFilters(prev => ({
+    setSelectedFilters((prev) => ({
       ...prev,
       [filterType]: prev[filterType].includes(value)
-        ? prev[filterType].filter(item => item !== value)
-        : [...prev[filterType], value]
+        ? prev[filterType].filter((item) => item !== value)
+        : [...prev[filterType], value],
     }));
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 0,
     }).format(price / 1000);
   };
@@ -122,36 +126,42 @@ const Search = () => {
   // Pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const filterChips = [
-    { category: 'main', items: ['Keyboards', 'Keycaps', 'Switches', 'Accessories', 'DIY Kits'] },
-    { category: 'layout', items: ['60%', '75%', 'Full-size', 'TKL'] },
-    { category: 'switchType', items: ['Linear', 'Tactile', 'Clicky'] },
-    { category: 'material', items: ['ABS', 'PBT', 'Metal'] },
+    {
+      category: "main",
+      items: ["Keyboards", "Keycaps", "Switches", "Accessories", "DIY Kits"],
+    },
+    { category: "layout", items: ["60%", "75%", "Full-size", "TKL"] },
+    { category: "switchType", items: ["Linear", "Tactile", "Clicky"] },
+    { category: "material", items: ["ABS", "PBT", "Metal"] },
   ];
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       {/* Search Bar */}
       <Box sx={{ mb: 4 }}>
-        <Box 
-          component="form" 
-          onSubmit={handleSearch} 
-          sx={{ 
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: '#363636',
-            borderRadius: '12px',
+        <Box
+          component="form"
+          onSubmit={handleSearch}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#363636",
+            borderRadius: "12px",
             p: 1,
             maxWidth: 600,
           }}
         >
-          <SearchIcon sx={{ color: '#adadad', ml: 2 }} />
+          <SearchIcon sx={{ color: "#adadad", ml: 2 }} />
           <TextField
             fullWidth
-            placeholder="Search for products"
+            placeholder="Buscar productos"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             variant="standard"
@@ -159,9 +169,9 @@ const Search = () => {
               disableUnderline: true,
               sx: {
                 pl: 2,
-                color: 'white',
-                '& .MuiInputBase-input::placeholder': {
-                  color: '#adadad',
+                color: "white",
+                "& .MuiInputBase-input::placeholder": {
+                  color: "#adadad",
                   opacity: 1,
                 },
               },
@@ -172,21 +182,21 @@ const Search = () => {
 
       {/* Filters Section */}
       <Box sx={{ mb: 4 }}>
-        <Typography 
-          variant="h5" 
-          sx={{ 
-            fontSize: '22px',
+        <Typography
+          variant="h5"
+          sx={{
+            fontSize: "22px",
             fontWeight: 700,
-            letterSpacing: '-0.015em',
+            letterSpacing: "-0.015em",
             mb: 3,
           }}
         >
-          Filters
+          Filtros
         </Typography>
-        
+
         {/* Category Filters */}
         <Box sx={{ mb: 3 }}>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
             {filterChips[0].items.map((item) => (
               <Chip
                 key={item}
@@ -194,23 +204,23 @@ const Search = () => {
                 onClick={() => {
                   // Map display names to actual categories
                   const categoryMap = {
-                    'Keyboards': 'mechanical',
-                    'Keycaps': 'keycaps',
-                    'Switches': 'accessories',
-                    'Accessories': 'accessories',
-                    'DIY Kits': 'mechanical'
+                    Keyboards: "mechanical",
+                    Keycaps: "keycaps",
+                    Switches: "accessories",
+                    Accessories: "accessories",
+                    "DIY Kits": "mechanical",
                   };
-                  const category = categoryMap[item] || 'all';
+                  const category = categoryMap[item] || "all";
                   handleCategoryChange(category);
                 }}
                 sx={{
-                  backgroundColor: '#363636',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#4d4d4d',
+                  backgroundColor: "#363636",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#4d4d4d",
                   },
-                  '&.Mui-focusVisible': {
-                    backgroundColor: '#3d98f4',
+                  "&.Mui-focusVisible": {
+                    backgroundColor: "#3d98f4",
                   },
                 }}
               />
@@ -221,7 +231,7 @@ const Search = () => {
         {/* Price Range */}
         <Box sx={{ mb: 3, maxWidth: 400 }}>
           <Typography variant="body1" sx={{ mb: 2, fontWeight: 500 }}>
-            Price Range
+            Rango de Precios
           </Typography>
           <Box sx={{ px: 2 }}>
             <Slider
@@ -232,23 +242,25 @@ const Search = () => {
               max={500}
               valueLabelFormat={(value) => `$${value}`}
               sx={{
-                color: '#3d98f4',
-                '& .MuiSlider-thumb': {
-                  backgroundColor: '#3d98f4',
+                color: "#3d98f4",
+                "& .MuiSlider-thumb": {
+                  backgroundColor: "#3d98f4",
                 },
-                '& .MuiSlider-track': {
-                  backgroundColor: '#3d98f4',
+                "& .MuiSlider-track": {
+                  backgroundColor: "#3d98f4",
                 },
-                '& .MuiSlider-rail': {
-                  backgroundColor: '#4d4d4d',
+                "& .MuiSlider-rail": {
+                  backgroundColor: "#4d4d4d",
                 },
               }}
             />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-              <Typography variant="body2" sx={{ color: '#9cabba' }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}
+            >
+              <Typography variant="body2" sx={{ color: "#9cabba" }}>
                 ${priceRange[0]}
               </Typography>
-              <Typography variant="body2" sx={{ color: '#9cabba' }}>
+              <Typography variant="body2" sx={{ color: "#9cabba" }}>
                 ${priceRange[1]}
               </Typography>
             </Box>
@@ -257,17 +269,21 @@ const Search = () => {
 
         {/* Layout Filters */}
         <Box sx={{ mb: 3 }}>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
             {filterChips[1].items.map((item) => (
               <Chip
                 key={item}
                 label={item}
-                onClick={() => handleFilterToggle('layout', item)}
+                onClick={() => handleFilterToggle("layout", item)}
                 sx={{
-                  backgroundColor: selectedFilters.layout.includes(item) ? '#3d98f4' : '#363636',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: selectedFilters.layout.includes(item) ? '#2984e6' : '#4d4d4d',
+                  backgroundColor: selectedFilters.layout.includes(item)
+                    ? "#3d98f4"
+                    : "#363636",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: selectedFilters.layout.includes(item)
+                      ? "#2984e6"
+                      : "#4d4d4d",
                   },
                 }}
               />
@@ -277,17 +293,21 @@ const Search = () => {
 
         {/* Switch Type Filters */}
         <Box sx={{ mb: 3 }}>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
             {filterChips[2].items.map((item) => (
               <Chip
                 key={item}
                 label={item}
-                onClick={() => handleFilterToggle('switchType', item)}
+                onClick={() => handleFilterToggle("switchType", item)}
                 sx={{
-                  backgroundColor: selectedFilters.switchType.includes(item) ? '#3d98f4' : '#363636',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: selectedFilters.switchType.includes(item) ? '#2984e6' : '#4d4d4d',
+                  backgroundColor: selectedFilters.switchType.includes(item)
+                    ? "#3d98f4"
+                    : "#363636",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: selectedFilters.switchType.includes(item)
+                      ? "#2984e6"
+                      : "#4d4d4d",
                   },
                 }}
               />
@@ -297,17 +317,21 @@ const Search = () => {
 
         {/* Material Filters */}
         <Box sx={{ mb: 3 }}>
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
             {filterChips[3].items.map((item) => (
               <Chip
                 key={item}
                 label={item}
-                onClick={() => handleFilterToggle('material', item)}
+                onClick={() => handleFilterToggle("material", item)}
                 sx={{
-                  backgroundColor: selectedFilters.material.includes(item) ? '#3d98f4' : '#363636',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: selectedFilters.material.includes(item) ? '#2984e6' : '#4d4d4d',
+                  backgroundColor: selectedFilters.material.includes(item)
+                    ? "#3d98f4"
+                    : "#363636",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: selectedFilters.material.includes(item)
+                      ? "#2984e6"
+                      : "#4d4d4d",
                   },
                 }}
               />
@@ -317,50 +341,59 @@ const Search = () => {
       </Box>
 
       {/* Products Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography 
-          variant="h5" 
-          sx={{ 
-            fontSize: '22px',
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{
+            fontSize: "22px",
             fontWeight: 700,
-            letterSpacing: '-0.015em',
+            letterSpacing: "-0.015em",
           }}
         >
-          Products
+          Productos
         </Typography>
-        
+
         <FormControl size="small" sx={{ minWidth: 200 }}>
           <Select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             sx={{
-              backgroundColor: '#363636',
-              color: 'white',
-              borderRadius: '12px',
-              '& .MuiOutlinedInput-notchedOutline': {
-                border: 'none',
+              backgroundColor: "#363636",
+              color: "white",
+              borderRadius: "12px",
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none",
               },
-              '& .MuiSelect-icon': {
-                color: 'white',
+              "& .MuiSelect-icon": {
+                color: "white",
               },
             }}
           >
-            <MenuItem value="name">Sort by Name</MenuItem>
-            <MenuItem value="price-low">Price: Low to High</MenuItem>
-            <MenuItem value="price-high">Price: High to Low</MenuItem>
-            <MenuItem value="rating">Highest Rated</MenuItem>
+            <MenuItem value="name">Ordenar por nombre</MenuItem>
+            <MenuItem value="price-low">Precio: Bajo a Alto</MenuItem>
+            <MenuItem value="price-high">Precio: Alto a Bajo</MenuItem>
+            <MenuItem value="rating">Mejor Calificado</MenuItem>
           </Select>
         </FormControl>
       </Box>
 
       {/* Results Info */}
       <Box sx={{ mb: 3 }}>
-        <Typography variant="h6" sx={{ color: 'white' }}>
-          {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
+        <Typography variant="h6" sx={{ color: "white" }}>
+          {filteredProducts.length} producto
+          {filteredProducts.length !== 1 ? "s" : ""} encontrado
+          {filteredProducts.length !== 1 ? "s" : ""}
         </Typography>
         {searchTerm && (
-          <Typography variant="body2" sx={{ color: '#9cabba' }}>
-            Results for: "{searchTerm}"
+          <Typography variant="body2" sx={{ color: "#9cabba" }}>
+            Resultados para: "{searchTerm}"
           </Typography>
         )}
       </Box>
@@ -371,13 +404,13 @@ const Search = () => {
           <Grid container spacing={3}>
             {currentProducts.map((product) => (
               <Grid item xs={12} sm={6} md={4} key={product.id}>
-                <Card 
-                  sx={{ 
-                    height: '100%', 
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    backgroundColor: '#1a1a1a',
-                    borderRadius: '12px',
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundColor: "#1a1a1a",
+                    borderRadius: "12px",
                   }}
                 >
                   <CardMedia
@@ -385,53 +418,54 @@ const Search = () => {
                     height="200"
                     image={product.image}
                     alt={product.name}
-                    sx={{ borderRadius: '12px 12px 0 0' }}
+                    sx={{ borderRadius: "12px 12px 0 0" }}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography 
-                      gutterBottom 
-                      variant="h6" 
+                    <Typography
+                      gutterBottom
+                      variant="h6"
                       component="h3"
-                      sx={{ 
-                        color: 'white',
-                        fontSize: '1rem',
+                      sx={{
+                        color: "white",
+                        fontSize: "1rem",
                         fontWeight: 500,
                       }}
                     >
                       {product.name}
                     </Typography>
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        color: '#9cabba',
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#9cabba",
                         mb: 2,
-                        fontSize: '0.875rem',
+                        fontSize: "0.875rem",
                       }}
                     >
-                      {product.description.length > 100 
-                        ? `${product.description.substring(0, 100)}...` 
-                        : product.description
-                      }
+                      {product.description.length > 100
+                        ? `${product.description.substring(0, 100)}...`
+                        : product.description}
                     </Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Star sx={{ color: '#ffd700', mr: 0.5, fontSize: '1rem' }} />
-                      <Typography variant="body2" sx={{ color: '#9cabba' }}>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                      <Star
+                        sx={{ color: "#ffd700", mr: 0.5, fontSize: "1rem" }}
+                      />
+                      <Typography variant="body2" sx={{ color: "#9cabba" }}>
                         {product.rating} ({product.inStock} available)
                       </Typography>
                     </Box>
-                    <Chip 
-                      label={product.brand} 
-                      size="small" 
-                      sx={{ 
+                    <Chip
+                      label={product.brand}
+                      size="small"
+                      sx={{
                         mb: 1,
-                        backgroundColor: '#363636',
-                        color: 'white',
-                      }} 
+                        backgroundColor: "#363636",
+                        color: "white",
+                      }}
                     />
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
-                        color: '#3d98f4',
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: "#3d98f4",
                         fontWeight: 700,
                       }}
                     >
@@ -442,12 +476,12 @@ const Search = () => {
                     <Button
                       size="small"
                       onClick={() => navigate(`/product/${product.id}`)}
-                      sx={{ 
-                        color: '#9cabba',
-                        textTransform: 'none',
+                      sx={{
+                        color: "#9cabba",
+                        textTransform: "none",
                       }}
                     >
-                      View Details
+                      Ver Detalles
                     </Button>
                     <Button
                       size="small"
@@ -456,15 +490,15 @@ const Search = () => {
                       onClick={() => addToCart(product)}
                       disabled={product.inStock === 0}
                       sx={{
-                        ml: 'auto',
-                        backgroundColor: '#3d98f4',
-                        '&:hover': {
-                          backgroundColor: '#2984e6',
+                        ml: "auto",
+                        backgroundColor: "#3d98f4",
+                        "&:hover": {
+                          backgroundColor: "#2984e6",
                         },
-                        textTransform: 'none',
+                        textTransform: "none",
                       }}
                     >
-                      Add
+                      Agregar
                     </Button>
                   </CardActions>
                 </Card>
@@ -474,18 +508,18 @@ const Search = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
               <Pagination
                 count={totalPages}
                 page={currentPage}
                 onChange={(event, value) => setCurrentPage(value)}
                 sx={{
-                  '& .MuiPaginationItem-root': {
-                    color: 'white',
+                  "& .MuiPaginationItem-root": {
+                    color: "white",
                   },
-                  '& .Mui-selected': {
-                    backgroundColor: '#3d98f4 !important',
-                    color: 'white',
+                  "& .Mui-selected": {
+                    backgroundColor: "#3d98f4 !important",
+                    color: "white",
                   },
                 }}
               />
@@ -493,25 +527,25 @@ const Search = () => {
           )}
         </>
       ) : (
-        <Alert 
+        <Alert
           severity="info"
           sx={{
-            backgroundColor: '#363636',
-            color: 'white',
-            '& .MuiAlert-icon': {
-              color: '#3d98f4',
+            backgroundColor: "#363636",
+            color: "white",
+            "& .MuiAlert-icon": {
+              color: "#3d98f4",
             },
           }}
         >
-          No products found matching your criteria.
-          <Button 
-            onClick={() => navigate('/')} 
-            sx={{ 
+          No se encontraron productos que coincidan con su criterio.
+          <Button
+            onClick={() => navigate("/")}
+            sx={{
               ml: 2,
-              color: '#3d98f4',
+              color: "#3d98f4",
             }}
           >
-            Go back home
+            Volver a la página de inicio
           </Button>
         </Alert>
       )}

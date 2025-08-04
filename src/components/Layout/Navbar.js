@@ -96,10 +96,10 @@ const Navbar = () => {
   };
 
   const categories = [
-    { name: 'Shop', path: '/search' },
-    { name: 'Build', path: '/search?category=mechanical' },
-    { name: 'Community', path: '#' },
-    { name: 'Support', path: '#' },
+    { name: 'Tienda', path: '/search' },
+    { name: 'Diseñar', path: '#' },
+    { name: 'Comunidad', path: '#' },
+    { name: 'Soporte', path: '#' },
   ];
 
   return (
@@ -196,7 +196,7 @@ const Navbar = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search for products"
+              placeholder="Buscar productos"
               inputProps={{ 'aria-label': 'search' }}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
