@@ -197,7 +197,8 @@ const Navbar = () => {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Buscar productos"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'Buscar productos' }}
+              title="Ingrese términos de búsqueda para encontrar productos"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={handleSearch}

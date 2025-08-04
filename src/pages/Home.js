@@ -373,7 +373,7 @@ const Home = () => {
                         sx={{ color: "#ffd700", mr: 0.5, fontSize: "1rem" }}
                       />
                       <Typography variant="body2" sx={{ color: "#9cabba" }}>
-                        {product.rating} ({product.inStock} available)
+                        {product.rating} ({product.inStock} disponibles)
                       </Typography>
                     </Box>
                     <Chip
