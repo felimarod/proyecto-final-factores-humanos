@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Link,
-  IconButton,
-  Divider,
-} from '@mui/material';
+import { Box, Container, Typography, Grid, Link, IconButton } from '@mui/material';
 import {
   Facebook,
   Twitter,
   Instagram,
+  YouTube,
   Email,
   Phone,
   LocationOn,
@@ -19,104 +12,327 @@ import {
 
 const Footer = () => {
   return (
-    <Box
-      component="footer"
-      sx={{
-        bgcolor: 'primary.main',
+    <Box 
+      component="footer" 
+      sx={{ 
+        backgroundColor: '#111418',
         color: 'white',
-        mt: 'auto',
-        py: 4,
+        py: 6,
+        mt: 8,
+        borderTop: '1px solid #363636',
       }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" gutterBottom>
-              KeyBoard Store
+          {/* Company Info */}
+          <Grid item xs={12} md={4}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                fontWeight: 700,
+                letterSpacing: '-0.025em',
+                mb: 2,
+                color: 'white',
+              }}
+            >
+              KeyboardsCo
             </Typography>
-            <Typography variant="body2">
-              Tu tienda especializada en teclados mecánicos y accesorios de alta calidad.
-              Encuentra el teclado perfecto para gaming, trabajo o uso diario.
+            <Typography 
+              variant="body2" 
+              sx={{ 
+                color: '#9cabba',
+                mb: 3,
+                lineHeight: 1.6,
+              }}
+            >
+              Your premier destination for mechanical keyboards and accessories. 
+              We provide high-quality products for enthusiasts and professionals alike.
             </Typography>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" gutterBottom>
-              Categorías
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Link color="inherit" href="/search?category=mechanical" sx={{ mb: 1 }}>
-                Teclados Mecánicos
-              </Link>
-              <Link color="inherit" href="/search?category=gaming" sx={{ mb: 1 }}>
-                Teclados Gaming
-              </Link>
-              <Link color="inherit" href="/search?category=accessories" sx={{ mb: 1 }}>
-                Accesorios
-              </Link>
-              <Link color="inherit" href="/search?category=keycaps" sx={{ mb: 1 }}>
-                Keycaps
-              </Link>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" gutterBottom>
-              Atención al Cliente
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Link color="inherit" href="#" sx={{ mb: 1 }}>
-                Preguntas Frecuentes
-              </Link>
-              <Link color="inherit" href="#" sx={{ mb: 1 }}>
-                Política de Devoluciones
-              </Link>
-              <Link color="inherit" href="#" sx={{ mb: 1 }}>
-                Envíos y Entregas
-              </Link>
-              <Link color="inherit" href="#" sx={{ mb: 1 }}>
-                Garantías
-              </Link>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" gutterBottom>
-              Contacto
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <Phone sx={{ mr: 1, fontSize: 'small' }} />
-              <Typography variant="body2">+57 123 456 7890</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <Email sx={{ mr: 1, fontSize: 'small' }} />
-              <Typography variant="body2">info@keyboardstore.com</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <LocationOn sx={{ mr: 1, fontSize: 'small' }} />
-              <Typography variant="body2">Bogotá, Colombia</Typography>
-            </Box>
             
-            <Box>
-              <IconButton color="inherit" href="#">
+            {/* Social Media */}
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton 
+                sx={{ 
+                  color: '#9cabba',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                    backgroundColor: 'rgba(61, 152, 244, 0.1)',
+                  },
+                }}
+              >
                 <Facebook />
               </IconButton>
-              <IconButton color="inherit" href="#">
+              <IconButton 
+                sx={{ 
+                  color: '#9cabba',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                    backgroundColor: 'rgba(61, 152, 244, 0.1)',
+                  },
+                }}
+              >
                 <Twitter />
               </IconButton>
-              <IconButton color="inherit" href="#">
+              <IconButton 
+                sx={{ 
+                  color: '#9cabba',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                    backgroundColor: 'rgba(61, 152, 244, 0.1)',
+                  },
+                }}
+              >
                 <Instagram />
               </IconButton>
+              <IconButton 
+                sx={{ 
+                  color: '#9cabba',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                    backgroundColor: 'rgba(61, 152, 244, 0.1)',
+                  },
+                }}
+              >
+                <YouTube />
+              </IconButton>
+            </Box>
+          </Grid>
+
+          {/* Quick Links */}
+          <Grid item xs={12} sm={6} md={2}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 600,
+                mb: 2,
+                color: 'white',
+              }}
+            >
+              Shop
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Link 
+                href="/search?category=mechanical" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Keyboards
+              </Link>
+              <Link 
+                href="/search?category=keycaps" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Keycaps
+              </Link>
+              <Link 
+                href="/search?category=accessories" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Switches
+              </Link>
+              <Link 
+                href="/search?category=accessories" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Accessories
+              </Link>
+            </Box>
+          </Grid>
+
+          {/* Support */}
+          <Grid item xs={12} sm={6} md={2}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 600,
+                mb: 2,
+                color: 'white',
+              }}
+            >
+              Support
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Link 
+                href="#" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Help Center
+              </Link>
+              <Link 
+                href="#" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Shipping Info
+              </Link>
+              <Link 
+                href="#" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Returns
+              </Link>
+              <Link 
+                href="#" 
+                sx={{ 
+                  color: '#9cabba',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { 
+                    color: '#3d98f4',
+                  },
+                }}
+              >
+                Contact Us
+              </Link>
+            </Box>
+          </Grid>
+
+          {/* Contact Info */}
+          <Grid item xs={12} md={4}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 600,
+                mb: 2,
+                color: 'white',
+              }}
+            >
+              Contact
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Email sx={{ color: '#3d98f4', mr: 2, fontSize: '1.25rem' }} />
+                <Typography sx={{ color: '#9cabba', fontSize: '0.875rem' }}>
+                  support@keyboardsco.com
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Phone sx={{ color: '#3d98f4', mr: 2, fontSize: '1.25rem' }} />
+                <Typography sx={{ color: '#9cabba', fontSize: '0.875rem' }}>
+                  +1 (555) 123-4567
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <LocationOn sx={{ color: '#3d98f4', mr: 2, fontSize: '1.25rem' }} />
+                <Typography sx={{ color: '#9cabba', fontSize: '0.875rem' }}>
+                  123 Tech Street, Silicon Valley, CA 94000
+                </Typography>
+              </Box>
             </Box>
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 3, bgcolor: 'rgba(255, 255, 255, 0.2)' }} />
-
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography variant="body2">
-            © 2025 KeyBoard Store. Todos los derechos reservados.
+        {/* Bottom Section */}
+        <Box 
+          sx={{ 
+            borderTop: '1px solid #363636',
+            mt: 4,
+            pt: 3,
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 2,
+          }}
+        >
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              color: '#9cabba',
+              fontSize: '0.875rem',
+            }}
+          >
+            © 2024 KeyboardsCo. All rights reserved.
           </Typography>
+          
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            <Link 
+              href="#" 
+              sx={{ 
+                color: '#9cabba',
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                '&:hover': { 
+                  color: '#3d98f4',
+                },
+              }}
+            >
+              Privacy Policy
+            </Link>
+            <Link 
+              href="#" 
+              sx={{ 
+                color: '#9cabba',
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                '&:hover': { 
+                  color: '#3d98f4',
+                },
+              }}
+            >
+              Terms of Service
+            </Link>
+            <Link 
+              href="#" 
+              sx={{ 
+                color: '#9cabba',
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                '&:hover': { 
+                  color: '#3d98f4',
+                },
+              }}
+            >
+              Cookie Policy
+            </Link>
+          </Box>
         </Box>
       </Container>
     </Box>

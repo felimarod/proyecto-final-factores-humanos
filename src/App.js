@@ -12,18 +12,93 @@ import Checkout from './pages/Checkout';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#252422',
+      main: '#3d98f4',
     },
     secondary: {
-      main: '#CC4122',
+      main: '#363636',
     },
     background: {
-      default: '#F5F5F5',
+      default: '#111418',
+      paper: '#1a1a1a',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#9cabba',
     },
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: '"Space Grotesk", "Noto Sans", "Roboto", Arial, sans-serif',
+    h1: {
+      fontWeight: 900,
+      letterSpacing: '-0.033em',
+    },
+    h2: {
+      fontWeight: 700,
+      letterSpacing: '-0.015em',
+    },
+    h3: {
+      fontWeight: 700,
+      letterSpacing: '-0.015em',
+    },
+    h4: {
+      fontWeight: 700,
+      letterSpacing: '-0.015em',
+    },
+    h5: {
+      fontWeight: 700,
+      letterSpacing: '-0.015em',
+    },
+    h6: {
+      fontWeight: 700,
+      letterSpacing: '-0.015em',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px',
+          textTransform: 'none',
+          fontWeight: 700,
+          letterSpacing: '0.015em',
+        },
+        contained: {
+          backgroundColor: '#3d98f4',
+          '&:hover': {
+            backgroundColor: '#2984e6',
+          },
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1a1a1a',
+          borderRadius: '12px',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            backgroundColor: '#363636',
+            borderRadius: '12px',
+            '& fieldset': {
+              borderColor: 'transparent',
+            },
+            '&:hover fieldset': {
+              borderColor: '#3d98f4',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#3d98f4',
+            },
+          },
+        },
+      },
+    },
   },
 });
 
