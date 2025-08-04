@@ -22,10 +22,13 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Cart = () => {
   const navigate = useNavigate();
   const { cart, updateQuantity, removeFromCart, getTotalPrice } = useCart();
+  
+  usePageTitle("Carrito de Compras");
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("en-US", {

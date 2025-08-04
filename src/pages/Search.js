@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import usePageTitle from "../hooks/usePageTitle";
 import {
   getProductsByCategory,
   products,
@@ -31,6 +32,8 @@ const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { addToCart } = useCart();
+  
+  usePageTitle("Buscar Productos");
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -161,11 +164,14 @@ const Search = () => {
           <SearchIcon sx={{ color: "#adadad", ml: 2 }} />
           <TextField
             fullWidth
+            label="Buscar productos"
             placeholder="Buscar productos"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             variant="standard"
+            title="Ingrese términos de búsqueda para encontrar productos"
             InputProps={{
+              "aria-label": "Buscar productos",
               disableUnderline: true,
               sx: {
                 pl: 2,
@@ -173,6 +179,9 @@ const Search = () => {
                 "& .MuiInputBase-input::placeholder": {
                   color: "#adadad",
                   opacity: 1,
+                },
+                "&.Mui-focused": {
+                  color: "#3d98f4",
                 },
               },
             }}

@@ -29,6 +29,7 @@ import {
 import { CreditCard, LocalShipping, CheckCircle } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import usePageTitle from '../hooks/usePageTitle';
 
 const steps = ['Información de Envío', 'Método de Pago', 'Confirmación'];
 
@@ -37,6 +38,8 @@ const Checkout = () => {
   const { cart, getTotalPrice, clearCart } = useCart();
   const [activeStep, setActiveStep] = useState(0);
   const [orderComplete, setOrderComplete] = useState(false);
+  
+  usePageTitle("Finalizar Compra");
   
   // Form states
   const [shippingInfo, setShippingInfo] = useState({

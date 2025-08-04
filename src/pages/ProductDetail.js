@@ -33,6 +33,7 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { products } from "../data/products";
+import usePageTitle from "../hooks/usePageTitle";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -43,6 +44,9 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Use dynamic title based on product name
+  usePageTitle(product ? product.name : "Producto");
 
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === parseInt(id));

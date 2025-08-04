@@ -9,9 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Home = () => {
   const navigate = useNavigate();
+  usePageTitle("Inicio");
 
   return (
     <>
