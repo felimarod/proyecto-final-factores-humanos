@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/proyecto-final-factores-humanos/static/css/main.74528253.css",
-    "main.js": "/proyecto-final-factores-humanos/static/js/main.37f888aa.js",
+    "main.js": "/proyecto-final-factores-humanos/static/js/main.9b6518d4.js",
     "index.html": "/proyecto-final-factores-humanos/index.html",
     "main.74528253.css.map": "/proyecto-final-factores-humanos/static/css/main.74528253.css.map",
-    "main.37f888aa.js.map": "/proyecto-final-factores-humanos/static/js/main.37f888aa.js.map"
+    "main.9b6518d4.js.map": "/proyecto-final-factores-humanos/static/js/main.9b6518d4.js.map"
   },
   "entrypoints": [
     "static/css/main.74528253.css",
-    "static/js/main.37f888aa.js"
+    "static/js/main.9b6518d4.js"
   ]
 }
